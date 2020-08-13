@@ -1,0 +1,11 @@
+{
+  "name": "EasyRTC",
+  "version": "1.0.0",
+  "dependencies": {
+  },
+  "scripts": {
+    "build:www": "cd web_src && npm run build",
+    "build:win": "go clean -cache && go build -tags release -o EasyRTC_SFU.exe -ldflags=\"-s -w\"",
+    "build:lin": "source /etc/profile && go clean -cache && go build -tags release -o EasyRTC_SFU -ldflags=\"-s -w\""
+  }
+}
