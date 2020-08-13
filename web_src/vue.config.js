@@ -6,7 +6,16 @@ module.exports = {
     outputDir: "www", // 输出文件目录
     lintOnSave: true, // eslint-loader 是否在保存的时候检查
     assetsDir: "static", //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
-    pages: undefined, // 以多页模式构建应用程序。
+    pages: {
+        index: {
+            entry: 'src/main.js',
+            template: 'public/index.html',
+        },
+        meetRoom: {
+            entry: 'src/views/MeetRoom/main.js',
+            template: 'public/meetRoom.html',
+        },
+    }, // 以多页模式构建应用程序。
     configureWebpack: {
         plugins: [
             new webpack.ProvidePlugin({
@@ -43,7 +52,7 @@ module.exports = {
             //     // ws: true,//websocket支持
             //     secure: false
             // },
-            
+
             "/*": {
                 target: "https://vc.easyrts.com",
                 changeOrigin: true,
