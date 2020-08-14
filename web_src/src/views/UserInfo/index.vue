@@ -8,6 +8,7 @@
         ref="ruleForm"
         label-width="100px"
         class="demo-ruleForm"
+        hide-required-asterisk
       >
         <div class="formTitle">
           <span>个人信息</span>
@@ -70,11 +71,26 @@
 import { userInfo, editUserInfo } from "../../request/modules/userInfo";
 export default {
   data() {
+    var validatePass1 = (rule, value, callback) => {
+      if (this.ruleForm.password != "") {
+        if (value === "") {
+          callback(new Error("密码不能为空"));
+        } else {
+          callback();
+        }
+      } else {
+        callback();
+      }
+    };
     var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("密码不能为空"));
-      } else if (value !== this.ruleForm.newpass) {
-        callback(new Error("两次输入密码不一致!"));
+      if (this.ruleForm.password != "") {
+        if (value === "") {
+          callback(new Error("密码不能为空"));
+        } else if (value !== this.ruleForm.newpass) {
+          callback(new Error("两次输入密码不一致!"));
+        } else {
+          callback();
+        }
       } else {
         callback();
       }
@@ -90,13 +106,8 @@ export default {
         confirmpass: "",
       },
       rules: {
-        displayName: [{ required: true, message: "姓名不能为空" }],
-        password: [{ required: true, message: "密码不能为空" }],
-        newpass: [{ required: true, message: "密码不能为空" }],
-        confirmpass: [
-          { validator: validatePass2, trigger: "blur" },
-          { required: true, message: "密码不能为空" },
-        ],
+        newpass: [{ validator: validatePass1, trigger: "blur" }],
+        confirmpass: [{ validator: validatePass2, trigger: "blur" }],
       },
     };
   },
@@ -115,6 +126,7 @@ export default {
     },
     // 表单提交
     submitForm(formName) {
+      console.log("jin来了");
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 将人数改为数字

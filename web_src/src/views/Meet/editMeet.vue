@@ -13,7 +13,7 @@
           <span>基本信息</span>
         </div>
         <el-form-item label="会议室名称:" prop="roomName">
-          <el-input type="text" v-model="ruleForm.roomName" autocomplete="off"></el-input>
+          <el-input type="text" v-model="ruleForm.roomName" :readonly='readonly' autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="会议室主题:" prop="roomConfig.subject">
           <el-input type="text" v-model="ruleForm.roomConfig.subject" autocomplete="off"></el-input>
@@ -55,11 +55,12 @@
 </template>
 
 <script>
-import { addMeet, getMeet,editMeet } from "../../request/modules/meet";
+import { addMeet, getMeet, editMeet } from "../../request/modules/meet";
 export default {
   data() {
     return {
       add: true,
+      readonly:false,
       id: "",
       options: [
         {
@@ -91,7 +92,14 @@ export default {
         },
       },
       rules: {
-        roomName: [{ required: true, message: "会议室名称不能为空" }],
+        roomName: [
+          { required: true, message: "会议室名称不能为空" },
+
+          {
+            pattern: /^\d{6,}$/, //正则
+            message: "最少6位纯数字",
+          },
+        ],
         subject: [{ required: true, message: "会议室主题不能为空" }],
       },
     };
@@ -100,6 +108,7 @@ export default {
     this.id = this.$route.query.id;
     if (this.id) {
       this.add = false;
+      this.readonly=true
       this.getmeet();
     }
   },

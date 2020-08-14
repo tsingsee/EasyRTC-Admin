@@ -2,7 +2,7 @@
   <div class="container_PlayerDlg">
     <el-dialog :visible.sync="show" width="100%" @close="onHide">
       <div class="container_player" @mouseleave="mouseleave" @mouseover="mouseover">
-        <video :src="videoUrl" controls autoplay="autoplay"></video>
+        <video ref="Video" :src="videoUrl" controls autoplay="autoplay"></video>
         <span class="container_clone" v-show="Clone" @click="onClone">
           <i class="iconfont iconclose1"></i>
         </span>
@@ -21,25 +21,27 @@ export default {
   },
   data() {
     return {
-			show: false,
-			Clone:false,
+      show: false,
+      Clone: false,
     };
   },
+  mounted() {},
   methods: {
     onHide() {
+      this.$refs.Video.pause();
       this.$emit("onHide");
-		},
-		onClone(){
-			this.show=false
-		},
-		mouseleave(){
-			console.log('离开');
-			this.oClone=false
-		},
-		mouseover(){
-				console.log('进来');
-			this.Clone=true
-		}
+    },
+    onClone() {
+      this.show = false;
+    },
+    mouseleave() {
+      console.log("离开");
+      this.oClone = false;
+    },
+    mouseover() {
+      console.log("进来");
+      this.Clone = true;
+    },
   },
 };
 </script>
