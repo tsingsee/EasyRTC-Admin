@@ -136,7 +136,6 @@ func (s PassportServer) Modify(c *gin.Context) {
 	}
 
 	uid := c.GetInt64(app.UserID)
-	// 检验原密码
 	user := app.User{}
 	err := s.DB().Select(app.SqlStar).From(app.UserTableName).
 		Where(app.WhereCommonId, uid).LoadOneContext(c, &user)
@@ -144,28 +143,41 @@ func (s PassportServer) Modify(c *gin.Context) {
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
-	pass := util.CheckPasswordHash(param.Password, user.Password)
-	if !pass {
-		c.AbortWithError(http.StatusBadRequest, errors.New("原密码错误"))
-		return
+
+	if param.Password != "" && param.NewPass != "" {
+		// 检验原密码
+		pass := util.CheckPasswordHash(param.Password, user.Password)
+		if !pass {
+			c.AbortWithError(http.StatusBadRequest, errors.New("原密码错误"))
+			return
+		}
+
+		// 通过，将新密码变为 hash
+		newPassHash, err := util.HashPassword(param.NewPass)
+		if err != nil {
+			c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		// 更新到数据库中
+		_, err = s.DB().Update(app.UserTableName).
+			Set(app.UserPasswordCol, newPassHash).
+			Set(app.UserDisNameCol, param.DisplayName).
+			Set(app.UserCompanyCol, param.Company).
+			Set(app.UserPhoneCol, param.Phone).
+			Set(app.UserEmailCol, param.Email).
+			Where(app.WhereCommonId, uid).
+			ExecContext(c)
+	} else {
+		_, err = s.DB().Update(app.UserTableName).
+			Set(app.UserDisNameCol, param.DisplayName).
+			Set(app.UserCompanyCol, param.Company).
+			Set(app.UserPhoneCol, param.Phone).
+			Set(app.UserEmailCol, param.Email).
+			Where(app.WhereCommonId, uid).
+			ExecContext(c)
 	}
 
-	// 通过，将新密码变为 hash
-	newPassHash, err := util.HashPassword(param.NewPass)
-	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
-		return
-	}
-
-	// 更新到数据库中
-	_, err = s.DB().Update(app.UserTableName).
-		Set(app.UserPasswordCol, newPassHash).
-		Set(app.UserDisNameCol, param.DisplayName).
-		Set(app.UserCompanyCol, param.Company).
-		Set(app.UserPhoneCol, param.Phone).
-		Set(app.UserEmailCol, param.Email).
-		Where(app.WhereCommonId, uid).
-		ExecContext(c)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
