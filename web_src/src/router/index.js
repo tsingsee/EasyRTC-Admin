@@ -11,7 +11,6 @@ const MeetIndex = () => import('../views/Meet/index.vue') //会议室列表
 
 const EditMeet=()=>import('../views/Meet/editMeet.vue') //会议室编辑
 
-const Player=()=>import('../views/Meet/player.vue') //会议室
 
 const UserInfo=()=>import('../views/UserInfo/index.vue') //用户信息模块
 
@@ -22,8 +21,9 @@ const MeetProc=()=>import('../views/MeetProc/index.vue') //会议记录列表
 const routes = [
   {
     path: '*',
-    redirect: '/'
+    redirect: '/login',
   },
+
   {
     path: '/login',
     component: Login,
@@ -32,11 +32,6 @@ const routes = [
     path: '/signin',
     component: Sigin,
   },
-  {
-    path: '/player',
-    component: Player,
-  },
-
   {
     path: '/',
     component: AdminTE,
