@@ -12,4 +12,4 @@ EasyRTC 视频会议管理系统为一款专门针对视频业务开发的一套
 - [x] 会议记录；
 
 ## 演示
-Web版：<a href="https://vc.easyrts.com/admin" target="_blank">https://vc.easyrts.com/admin</a>
+Web版：<a href="https://sfu.easyrtc.cn/admin" target="_blank">https://sfu.easyrtc.cn/admin</a>
