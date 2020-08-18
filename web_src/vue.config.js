@@ -54,7 +54,7 @@ module.exports = {
             // },
 
             "/*": {
-                target: "https://vc.easyrts.com",
+                target: "https://sfu.easyrtc.cn",
                 changeOrigin: true,
                 // ws: true,//websocket支持
                 secure: false

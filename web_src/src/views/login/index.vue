@@ -92,8 +92,8 @@
               style="font-size: 70px;position: absolute;top: -15px;left: 0;color:#2a88d7"
             ></i>
           </span>
-          .com
         </a>
+        .com
         All rights reserved
       </span>
     </div>
@@ -161,7 +161,7 @@ export default {
           } else if (arr2[0] == "userPwd") {
             this.loginForm.password = arr2[1];
           } else if (arr2[0] == "single") {
-            if (arr2[1]=='true') {
+            if (arr2[1] == "true") {
               this.single = true;
             }
           }

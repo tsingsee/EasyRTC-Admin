@@ -15,10 +15,10 @@
             style="font-size: 70px;position: absolute;top: -15px;left: 0;color:#2a88d7"
           ></i>
         </span>
-        .com
       </a>
-			All rights reserved
-    </span> 
+      .com
+      All rights reserved
+    </span>
   </div>
 </template>
 <script>
