@@ -136,13 +136,15 @@ export default {
   },
   methods: {
     // 设置cookie方法
-    setCookie(c_name, c_pwd, exdays) {
+    setCookie(c_name, c_pwd, single, exdays) {
       var exdate = new Date();
       exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
       window.document.cookie =
         "userName" + "=" + c_name + ";path=/;expires=" + exdate.toGMTString();
       window.document.cookie =
         "userPwd" + "=" + c_pwd + ";path=/;expires=" + exdate.toGMTString();
+      window.document.cookie =
+        "single" + "=" + single + ";path=/;expires=" + exdate.toGMTString();
     },
     // 清楚cookie
     clearCookie: function () {
@@ -158,6 +160,10 @@ export default {
             this.loginForm.name = arr2[1];
           } else if (arr2[0] == "userPwd") {
             this.loginForm.password = arr2[1];
+          } else if (arr2[0] == "single") {
+            if (arr2[1]=='true') {
+              this.single = true;
+            }
           }
         }
       }
@@ -196,22 +202,28 @@ export default {
           $(".verPlace")[0].classList.add("err");
         }
         if (valid) {
-          login(this.loginForm).then((res) => {
-            this.$message({
-              message: "登录成功",
-              type: "success",
-            });
-            this.clearCookie();
-            if (this.single == true) {
-              this.setCookie(this.loginForm.name, this.loginForm.password, 7);
-            } else {
+          login(this.loginForm)
+            .then((res) => {
+              this.$message({
+                message: "登录成功",
+                type: "success",
+              });
               this.clearCookie();
-            }
-            this.$router.push("/MeetIndex");
-          })
-          .catch(res=>{
-            this.getCaptchaId() 
-          })
+              if (this.single == true) {
+                this.setCookie(
+                  this.loginForm.name,
+                  this.loginForm.password,
+                  this.single,
+                  7
+                );
+              } else {
+                this.clearCookie();
+              }
+              this.$router.push("/MeetIndex");
+            })
+            .catch((res) => {
+              this.getCaptchaId();
+            });
         }
       });
     },
@@ -219,8 +231,7 @@ export default {
     forgetPaw() {
       this.$alert("请联系工作人员！", "提示", {
         confirmButtonText: "确定",
-        callback: (action) => {
-        },
+        callback: (action) => {},
       });
     },
   },

@@ -27,7 +27,7 @@
         </el-table-column>
         <el-table-column prop="duration" label="录制时长">
           <template slot-scope="scope">
-            <div>{{scope.row.duration+' S'}}</div>
+            <div>{{duration(scope.row.duration)}}</div>
           </template>
         </el-table-column>
         <el-table-column prop="size" label="文件大小">
@@ -97,6 +97,25 @@ export default {
       return function (e) {
         return `${(e / 1024 / 1024).toFixed(2)}M`;
       };
+    },
+    duration: function () {
+      return  function(value) {
+			let s = parseInt(value);
+			let m = 0;
+			let h = 0;
+			let result = 0;
+			if (s >= 60) {
+				m = parseInt(s / 60);
+				s = parseInt(s % 60);
+				if (m >= 60) {
+					h = parseInt(m / 60);
+					m = parseInt(m % 60);
+				}
+			}
+			result = (h <= 9 ? '0' + h : h).toString() + ':' + (m <= 9 ? '0' + m : m).toString() + ':' + (s <= 9 ? '0' + s : s).toString();
+			return result;
+		}
+
     },
     downloadName: function () {
       return function (e) {
