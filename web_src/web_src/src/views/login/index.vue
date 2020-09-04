@@ -88,7 +88,7 @@
               style="font-size: 78px;position: absolute;top: -15px;left: 0;color:#2a88d7"
             ></i>
           </span>
-        </a>.com All rights reserved
+        </a>.com. All rights reserved
       </span>
     </div>
   </div>

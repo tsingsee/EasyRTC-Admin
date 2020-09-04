@@ -1,0 +1,23 @@
+### 注册用户
+POST http://localhost:8004/admin/conference/info
+
+### 获取正在进行的会议室列表
+POST http://localhost:8004/admin/conference/runing
+
+### 解散会议室
+POST http://localhost:8004/admin/conference/dispose
+
+### 锁定会议室
+POST http://localhost:8004/admin/conference/lock
+
+### 解锁会议室
+POST http://localhost:8004/admin/conference/unlock
+
+### 会议室历史记录
+POST http://localhost:8004/admin/conference/history
+
+### 会议室事件
+POST http://localhost:8004/admin/conference/action
+
+###
+
