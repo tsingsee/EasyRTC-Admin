@@ -392,6 +392,7 @@ div {
     padding: 20px;
     box-sizing: border-box;
     overflow-y: scroll;
+    //进度条样式
     &::-webkit-scrollbar {
         /*滚动条整体样式*/
         width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
@@ -461,13 +462,21 @@ div {
 .container_login{
     height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #F5F5F5;
     .container_body{
-        margin: auto;
+        margin-top: -100px;
         max-width: 960px;
         box-shadow:0px 4px 10px 0px rgba(60,124,219,0.15);
         border-radius:4px;
         overflow: hidden;
+        .el-carousel__indicators {
+            display: none;
+        }
+        .el-carousel__arrow {
+            display: none;
+        }
     }
     .el-row{
         height: 100%;
@@ -632,7 +641,7 @@ div {
     }
     .container_footer{
         width: 100%;
-        height: 50px;
+        height:76px;
         position: fixed;
         bottom: 0;
     }

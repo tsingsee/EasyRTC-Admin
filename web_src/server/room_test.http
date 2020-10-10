@@ -1,0 +1,85 @@
+### 创建房间
+POST http://localhost:8004/admin/room/create
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "roomName": "测试房间3",
+  "participantLimits": 10,
+  "allowAnonymous": false,
+  "roomConfig": {
+    "resolution": 320,
+    "subject": "房间主题",
+    "lockPassword": "8384",
+    "requireDisplayName": true,
+    "startWithAudioMuted": false,
+    "startWithVideoMuted": false,
+    "fileRecordingsEnabled": false,
+    "liveStreamingEnabled": false,
+    "bandwidth": 1000
+  }
+}
+
+### 获取房间
+POST http://localhost:8004/admin/room/info
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+Cookie: rtcadmin=test
+
+{
+  "id": 2
+}
+
+### 修改房间
+POST http://localhost:8004/admin/room/modify
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+Cookie: rtcadmin=test
+
+{
+  "id": 1,
+  "roomName": "测试房间",
+  "participantLimits": 13,
+  "allowAnonymous": false,
+  "roomConfig": {
+    "resolution": 320,
+    "subject": "房间配置主题",
+    "lockPassword": "8384",
+    "requireDisplayName": true,
+    "startWithAudioMuted": false,
+    "startWithVideoMuted": false,
+    "fileRecordingsEnabled": false,
+    "liveStreamingEnabled": false,
+    "bandwidth": 1000
+  }
+}
+
+### 获取房间列表
+POST http://localhost:8004/admin/room/list
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+Cookie: rtcadmin=test
+
+{
+  "page": 0,
+  "perPage": 10
+}
+
+### 删除房间
+POST http://localhost:8004/admin/room/delete
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+Cookie: rtcadmin=test
+
+{
+  "id": 1
+}
+
+### 获取 token
+POST http://localhost:8004/admin/room/token
+

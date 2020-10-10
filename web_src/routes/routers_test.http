@@ -1,0 +1,18 @@
+### 获取验证码id
+POST http://localhost:8004/admin/captcha-id
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+### 获取图片验证码
+GET http://localhost:8004/admin/captcha/2uVP5dd1mOIw0ShdNNc7.png
+Accept: */*
+Cache-Control: no-cache
+
+### 获取语音验证码
+GET http://localhost:8004/admin/captcha/DEpEyBEkn1tRq5rCB5xy.wav
+Accept: */*
+Cache-Control: no-cache
+
+###
+

@@ -6,7 +6,7 @@
           <div class="carousel">
             <el-carousel trigger="click" height="580px">
               <el-carousel-item v-for="(item,index) in carousel" :key="index">
-                <a :href="item.path" target="_blank">
+                <a >
                   <img :src="item.img" />
                 </a>
               </el-carousel-item>
@@ -77,24 +77,18 @@
       </el-row>
     </div>
     <div class="container_footer">
-      <span style="color:#808080">
-        Copyright &copy; 2014-{{ thisYear() }}
-        <a
-          href="http://www.tsingsee.com/"
-          style="color:#2a88d7"
-          target="_target"
-        >
+      <span style="color:#333333">
+        Copyright &copy; 2014-{{ thisYear()}}
+        <a href="http://www.tsingsee.com/" style="color:#2a88d7" target="_target">
           <span
-            style="width: 70px;height: 16px;position: relative;overflow: hidden;display: inline-block;"
+            style="width: 78px;height: 16px;position: relative;overflow: hidden;display: inline-block;margin-left: -2px;"
           >
             <i
               class="iconfont iconqingxiLOGO"
-              style="font-size: 70px;position: absolute;top: -15px;left: 0;color:#2a88d7"
+              style="font-size: 78px;position: absolute;top: -15px;left: 0;color:#2a88d7"
             ></i>
           </span>
-          .com
-        </a>
-        All rights reserved
+        </a>.com All rights reserved
       </span>
     </div>
   </div>
@@ -125,7 +119,7 @@ export default {
       carousel: [
         {
           img: require("../../assets/image/login1.png"),
-          path: "#",
+          path: "",
         },
       ],
     };
@@ -161,7 +155,7 @@ export default {
           } else if (arr2[0] == "userPwd") {
             this.loginForm.password = arr2[1];
           } else if (arr2[0] == "single") {
-            if (arr2[1]=='true') {
+            if (arr2[1] == "true") {
               this.single = true;
             }
           }

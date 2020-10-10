@@ -19,7 +19,7 @@
           <el-input type="text" v-model="ruleForm.roomConfig.subject" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="最多人数:" prop="participantLimits">
-          <el-input type="number" v-model="ruleForm.participantLimits" autocomplete="off"></el-input>
+          <el-input type="text" v-model="ruleForm.participantLimits" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="清晰度:" prop="resolution">
           <el-select v-model="ruleForm.roomConfig.resolution" placeholder="请选择">
@@ -98,6 +98,13 @@ export default {
           {
             pattern: /^\d{6,}$/, //正则
             message: "最少6位纯数字",
+          },
+        ],
+        participantLimits:[
+      
+          {
+            pattern: /^((?!0)\d{1,3}|1000|1)$/, //正则
+            message: "人数为1-1000",
           },
         ],
         subject: [{ required: true, message: "会议室主题不能为空" }],
